@@ -9,8 +9,9 @@ class Main {
     //System.out.println(isPrime(24));
     //System.out.println(numcount.countPrimes(24));
     //System.out.println(numcount.countPrimes(100));
-    //System.out.println(numcount.countPrimes(1000000));
-    System.out.println(numcount.countPrimesEff(50000));
+    System.out.println(numcount.countPrimes(1000000, 1000));
+    //System.out.println(numcount.countPrimesEff(1000000, 1000));
+
   }
   
 

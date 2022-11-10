@@ -3,16 +3,13 @@ public class numHandler{
   public int countFactors(int num){ // check countPrimesEff for comments
     //System.out.println(primeNum);
     int numOfFac = 0;
-    int i = 1;
-    while(i<num){
-      //System.out.println(i);
-      //System.out.println(primeNum.get(i));
-      if (num % i == 0){
-        numOfFac++;
+    double sqrt = Math.sqrt(num);
+    for(int i = 1; i<sqrt; i++){
+      if(num % i == 0){
+        numOfFac += 2;
       }
-      i++;
     }
-    //System.out.println(num + " has " + numOfFac + " factors");
+    //System.out.println(num + " has " + numOfFac + " factors"); 
     return numOfFac;
   }
 
@@ -23,8 +20,9 @@ public class numHandler{
     return false;
   }
 
-  public int countPrimes(int num){ // check countPrimesEff for comments
+  public HashMap<String,Integer> countPrimes(int num, int printStep){ // check countPrimesEff for comments
     //System.out.println(Arrays.toString(primeNum));
+    HashMap<String, Integer> primes = new HashMap<>();
     long start = System.currentTimeMillis();
     int numOfPrimes = 0;
     for(int i = 2;i<num;i++){
@@ -33,18 +31,20 @@ public class numHandler{
       if(isPrime(i)){
         //System.out.println(i + " is prime");
         //System.out.println(Arrays.toString(primeNum));
+        primes.put(String.valueOf(i),i);
         numOfPrimes++;
       }
-      if(i % 1000 == 0){
+      if(i % printStep == 0){
         long time = System.currentTimeMillis() - start2;
         System.out.println(i + " Calc Took: " + time + "ms");
       }
     }
+    primes.put("primeNumbers", numOfPrimes);
     System.out.println("Final Calc Took: " + (System.currentTimeMillis() - start) + "ms");
-    return numOfPrimes;
+    return primes;
   }
 // The reason for this being a different function is that the design requirements for the base countPrimes function is that it had to call the other 2 functions, and i wanted to see if this was faster.
-  public HashMap<String,Integer> countPrimesEff(int num){ 
+  public HashMap<String,Integer> countPrimesEff(int num, int printStep){ 
     long start = System.currentTimeMillis();  // Base Start time for total calculations
     HashMap<String, Integer> primes = new HashMap<>(); // create hash map to store calculated prime values
     int numOfPrimes = -1; // offset by 1 as for some reason this function is inaccurate by 1.
@@ -62,7 +62,7 @@ public class numHandler{
         primes.put(String.valueOf(i), i); // enter prime number into HashMap
         numOfPrimes++; // add to number of primes
       }
-      if(i % 1000 == 0){ // This is just to print every 1000 numbers, as printing every number and timestamp slows it down but we still need a marker of progress
+      if(i % printStep == 0){ // This is just to print every printStep, so ie every 100, 1000 and so on numbers, as printing every number and timestamp slows it down but we still need a marker of progress, give or take its about 100ms difference
         long time = System.currentTimeMillis() - start2;
         System.out.println(i + " Calc Took: " + time + "ms");
       }
