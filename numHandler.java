@@ -3,7 +3,7 @@ public class numHandler{
   public int countFactors(int num){ // check countPrimesEff for comments
     //System.out.println(primeNum);
     int numOfFac = 0;
-    double sqrt = Math.sqrt(num);
+    int sqrt = (int)Math.sqrt(num)+1;
     for(int i = 1; i<sqrt; i++){
       if(num % i == 0){
         numOfFac += 2;
